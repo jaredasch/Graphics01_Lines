@@ -11,17 +11,17 @@ int main() {
   screen s;
   color c;
 
-  c.red = 0;
-  c.green = MAX_COLOR;
-  c.blue = 0;
-
   clear_screen(s);
 
-  draw_line(150, 150, 350, 250, s, c);
-  draw_line(350, 250, 250, 450, s, c);
-  draw_line(250, 450, 50, 350, s, c);
-  draw_line(50, 350, 150, 150, s, c);
+  for(int i = 0; i <= 500; i+=10){
+      c.blue = 256 - (i * 256 / 500);
+      c.green = (i * 256 / 500);
+      c.red = (i * 256 / 500);
+      draw_line(0, i, i, 500, s, c); // Octants 1 and 2
+      draw_line(500, i, i, 0, s, c); // Octants 5 and 6
+      draw_line(i, 0, 0, 500-i, s, c); // Octants 7 and 8
+      draw_line(500, i, 500-i, 500, s, c); // Octants 3 and 4
+  }
 
-  display(s);
   save_extension(s, "lines.png");
 }
